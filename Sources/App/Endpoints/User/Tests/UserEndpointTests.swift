@@ -7,15 +7,6 @@ extension Routes.Users: UserEndpoint { }
 
 final class UserEndpointTests: AppTesCase {
 
-    private func deleteAllUsers() throws {
-        let conn = try dbConnection()
-        try UserToken.query(on: conn, withSoftDeleted: true).delete(force: true).wait()
-        let users = User.query(on: conn).all()
-        try users.wait().forEach { user in
-            try user.delete(on: conn).wait()
-        }
-    }
-    
     func testUserLogin() throws {
         try deleteAllUsers()
 
