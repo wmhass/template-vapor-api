@@ -3,7 +3,7 @@ import Vapor
 import XCTest
 import FluentPostgreSQL
 
-class AppTesCase: XCTestCase {
+class AppTestCase: XCTestCase {
 
     lazy var app: Application = {
         let app = try! AppMock.defaultTestApp()
@@ -32,13 +32,22 @@ class AppTesCase: XCTestCase {
     }
 }
 
-extension AppTesCase {
+extension AppTestCase {
     func deleteAllUsers() throws {
         let conn = try dbConnection()
         try UserToken.query(on: conn, withSoftDeleted: true).delete(force: true).wait()
         let users = User.query(on: conn).all()
         try users.wait().forEach { user in
             try user.delete(on: conn).wait()
+        }
+    }
+}
+
+extension AppTestCase {
+    func deleteAllTodos() throws {
+        let todos = Todo.query(on: try dbConnection()).all()
+        try todos.wait().forEach { todo in
+            try todo.delete(on: dbConnection()).wait()
         }
     }
 }

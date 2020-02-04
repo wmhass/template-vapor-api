@@ -13,7 +13,7 @@ extension CreateUserResponseContent {
     }
 }
 
-final class LoginEndpointTests: AppTesCase {
+final class LoginEndpointTests: AppTestCase {
 
     func testUserCreation() throws {
         // Boot

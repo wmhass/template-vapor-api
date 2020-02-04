@@ -5,7 +5,7 @@ import XCTest
 
 extension Routes.Users: UserEndpoint { }
 
-final class UserEndpointTests: AppTesCase {
+final class UserEndpointTests: AppTestCase {
 
     func testUserLogin() throws {
         try deleteAllUsers()

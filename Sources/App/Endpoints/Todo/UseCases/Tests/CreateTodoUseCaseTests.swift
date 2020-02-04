@@ -3,7 +3,7 @@ import Vapor
 import XCTest
 import PostgreSQL
 
-final class CreateTodoUseCaseTests: AppTesCase {
+final class CreateTodoUseCaseTests: AppTestCase {
 
     func testTodoCreation() throws {
         let createUseCase = CreateTodoUseCase(user: try user(), db: try dbConnection())

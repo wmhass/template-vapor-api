@@ -4,15 +4,8 @@ import XCTest
 
 extension Routes.Todos: TodosEndpoint { }
 
-final class TodosEndpointTests: AppTesCase {
+final class TodosEndpointTests: AppTestCase {
 
-    private func deleteAllTodos() throws {
-        let todos = Todo.query(on: try dbConnection()).all()
-        try todos.wait().forEach { todo in
-            try todo.delete(on: dbConnection()).wait()
-        }
-    }
-    
     func testFetchTodo() throws {
         try deleteAllTodos()
 

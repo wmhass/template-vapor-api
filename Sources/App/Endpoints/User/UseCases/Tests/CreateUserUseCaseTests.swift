@@ -3,7 +3,7 @@ import Vapor
 import XCTest
 import PostgreSQL
 
-final class CreateUserUseCaseTests: AppTesCase {
+final class CreateUserUseCaseTests: AppTestCase {
 
     func testUserCreation() throws {
         try deleteAllUsers()
@@ -37,7 +37,5 @@ final class CreateUserUseCaseTests: AppTesCase {
         } catch let exception {
             XCTFail("Failed: \(exception.localizedDescription)")
         }
-
-        
     }
 }
