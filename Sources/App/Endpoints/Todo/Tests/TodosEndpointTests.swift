@@ -61,7 +61,7 @@ final class TodosEndpointTests: AppTesCase {
         
         let authObject = try UserTokenMock.userToken(db: try dbConnection())
 
-        let createTodoRequestBody = CreateTodoRequestBody(title: "")
+        let createTodoRequestBody = CreateTodoRequestBody(title: "some")
         let createTodoRequestContent = CreateTodoRequestContent(
             token: authObject.string,
             body: createTodoRequestBody

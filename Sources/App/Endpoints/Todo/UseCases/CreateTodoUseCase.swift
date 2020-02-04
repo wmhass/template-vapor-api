@@ -5,6 +5,9 @@ struct CreateTodoUseCase {
     let db: DatabaseConnectable
 
     func createTodo(_ todo: Todo) throws -> Future<Todo> {
+        guard !todo.title.isEmpty else {
+            throw Abort(.badRequest, reason: "Title should not be empty")
+        }
         return todo.save(on: db)
     }
 }
