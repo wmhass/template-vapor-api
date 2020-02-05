@@ -1,6 +1,7 @@
 @testable import App
 import Vapor
 import XCTest
+import PostgreSQL
 
 final class AuthenticateUserUseCaseTests: AppTestCase {
 
@@ -13,6 +14,16 @@ final class AuthenticateUserUseCaseTests: AppTestCase {
     }
     
     func testAuthenticationFailed() throws {
-        // TODO: Implement tests
+        let user = User(id: 1, name: "Some", email: "mail@mail.com", passwordHash: "1222")
+        let useCase = AuthenticateUserUseCase(user: user, db: try dbConnection())
+        do {
+            let _ = try useCase.authenticateUser().wait()
+            XCTFail("User shouldn't authenticate")
+        } catch let exception as PostgreSQLError {
+            XCTAssertTrue(true, "Success - Authentication failed: \(exception.localizedDescription)")
+        } catch let exception {
+            XCTFail("Failed: \(exception.localizedDescription)")
+        }
+        
     }
 }
