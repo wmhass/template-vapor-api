@@ -20,8 +20,4 @@ final class FetchTodoUseCaseTests: AppTestCase {
         let todos = try fetchTodoUseCase.fetch().wait()
         XCTAssertTrue(todos.contains(where: { $0.id == newTodo.id }))
     }
-    
-    func testFetchTodoFailed() throws {
-        // TODO: Implement tests
-    }
 }
